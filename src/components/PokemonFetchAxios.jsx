@@ -29,23 +29,27 @@ const PokemonFetchAxios = () => {
   useEffect(() => {
     const fetchAllPokemon = async () => {
       try {
+        // Fetch initial list of Pokémon
+        const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10");
+      
+        // Sequentially fetch details for each Pokémon
+        const pokemonData = [];
+        for (const pokemon of response.data.results) {
+          const resp = await axios.get(pokemon.url);
+          // console.log(resp.data);
+          pokemonData.push(resp.data)
+        }
         
+        // Update the state with the detailed Pokémon data
+        setPokemonList(pokemonData);
       } catch (error) {
-        
+        console.error("Failed to fetch Pokémon:", error);
       } finally {
         
       }
-        // Fetch initial list of Pokémon
-   
-
-        // Sequentially fetch details for each Pokémon
-     
-
-        // Update the state with the detailed Pokémon data
-    
     };
 // invoke function
-
+    fetchAllPokemon();
   }, []);
 
   return (

@@ -10,14 +10,20 @@ const PokemonBasicFetchAxios = () => {
     const fetchPokemon = async () => {
       try {
         // fetch data from api
+        const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10");
+        setPokemonData(response.data.results);
+        console.log(response);
         // handle data
       } catch (error) {
         // handle error
+        console.error("Failted to fetch Pokemon:", error);
       } finally {
         // handle loading
+        setLoading(false);
       }
     };
     // invoke function
+    fetchPokemon();
   }, []);
 
   if (loading) {
