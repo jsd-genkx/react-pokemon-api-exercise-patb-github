@@ -9,12 +9,21 @@ const PokemonBasicFetch = () => {
     const fetchPokemon = async () => {
       try {
         // fetch data from api
-
-
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
         // handle data
-
+        if (!response.ok) {
+          throw new Error("Fetch failed...");
+        }
+        const data = await response.json();
+        setPokemonData(data.results);
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
     // invoke function
-
+    fetchPokemon();
   }, []);
 
   if (loading) {

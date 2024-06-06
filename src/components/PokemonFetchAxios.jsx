@@ -29,6 +29,12 @@ const PokemonFetchAxios = () => {
   useEffect(() => {
     const fetchAllPokemon = async () => {
       try {
+        
+      } catch (error) {
+        
+      } finally {
+        
+      }
         // Fetch initial list of Pokémon
    
 
